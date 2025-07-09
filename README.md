@@ -1,4 +1,12 @@
-# 📚 Database & Backend Projects Collection
+
+# RISE Database (SQL & NoSQL) 
+
+**Student Id :- TS-RISE-DBSM-2628
+
+**Offer Letter:**  
+[View Offer Letter](https://drive.google.com/file/d/1wMTbnMURJVXe2ywfG19PBcWZa1NrJppE/view?usp=drivesdk)
+
+---
 
 A curated set of database-driven projects showcasing SQL, NoSQL, and backend development skills using MySQL, PostgreSQL, MongoDB, Flask, Django, Node.js, and more.
 
