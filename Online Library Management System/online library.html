@@ -1,0 +1,539 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Online Library Management System
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <style>
+   body {
+      font-family: 'Roboto', sans-serif;
+    }
+    /* Scrollbar for tables */
+    .scrollbar-thin::-webkit-scrollbar {
+      height: 6px;
+      width: 6px;
+    }
+    .scrollbar-thin::-webkit-scrollbar-thumb {
+      background-color: rgba(100, 116, 139, 0.5);
+      border-radius: 10px;
+    }
+  </style>
+ </head>
+ <body class="bg-gray-50 min-h-screen flex flex-col">
+  <!-- Top Navigation Bar -->
+  <header class="bg-white shadow-md sticky top-0 z-50">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+    <div class="flex items-center space-x-3">
+     <img alt="Online Library logo, stylized open book with digital pixels" class="w-10 h-10 rounded-md" height="40" src="https://storage.googleapis.com/a1aa/image/c7e175fb-1d7f-4e3a-9edc-bbd926ddfd22.jpg" width="40"/>
+     <h1 class="text-2xl font-semibold text-indigo-700 select-none">
+      Online Library
+     </h1>
+    </div>
+    <nav class="hidden md:flex space-x-6 text-gray-700 font-medium">
+     <a class="hover:text-indigo-600 transition" href="#dashboard">
+      Dashboard
+     </a>
+     <a class="hover:text-indigo-600 transition" href="#books">
+      Books
+     </a>
+     <a class="hover:text-indigo-600 transition" href="#issue-history">
+      My Issues
+     </a>
+     <a class="hover:text-indigo-600 transition" href="#admin">
+      Admin Panel
+     </a>
+    </nav>
+    <div class="flex items-center space-x-4">
+     <button aria-label="Open menu" class="md:hidden text-gray-600 hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded" id="mobile-menu-button">
+      <i class="fas fa-bars fa-lg">
+      </i>
+     </button>
+     <div class="relative">
+      <input aria-label="Global search books and authors" class="hidden md:block w-64 pl-10 pr-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm" id="global-search" placeholder="Search books, authors..." type="search"/>
+      <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none hidden md:block">
+      </i>
+     </div>
+     <button aria-label="User profile menu" class="flex items-center space-x-2 text-gray-700 hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded">
+      <img alt="User profile avatar, circle with letter U" class="w-8 h-8 rounded-full" height="32" src="https://storage.googleapis.com/a1aa/image/14ee6aa8-effd-47da-7eb3-1c9cc11f291f.jpg" width="32"/>
+      <span class="hidden sm:inline font-medium">
+       Tushar Awale
+      </span>
+      <i class="fas fa-chevron-down text-xs">
+      </i>
+     </button>
+    </div>
+   </div>
+   <!-- Mobile Menu -->
+   <nav aria-label="Mobile menu" class="md:hidden bg-white border-t border-gray-200 hidden" id="mobile-menu">
+    <a class="block px-4 py-3 text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 font-medium" href="#dashboard">
+     Dashboard
+    </a>
+    <a class="block px-4 py-3 text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 font-medium" href="#books">
+     Books
+    </a>
+    <a class="block px-4 py-3 text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 font-medium" href="#issue-history">
+     My Issues
+    </a>
+    <a class="block px-4 py-3 text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 font-medium" href="#admin">
+     Admin Panel
+    </a>
+    <div class="px-4 py-3 border-t border-gray-200 flex items-center space-x-3">
+     <img alt="User profile avatar, circle with letter U" class="w-8 h-8 rounded-full" height="32" src="https://storage.googleapis.com/a1aa/image/14ee6aa8-effd-47da-7eb3-1c9cc11f291f.jpg" width="32"/>
+     <span class="font-medium text-gray-700">
+      John Doe
+     </span>
+    </div>
+   </nav>
+  </header>
+  <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+   <!-- Dashboard Section -->
+   <section class="mb-12" id="dashboard">
+    <h2 class="text-3xl font-semibold text-gray-900 mb-6">
+     Dashboard
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+     <div class="bg-white rounded-lg shadow p-6 flex items-center space-x-4">
+      <div class="p-3 bg-indigo-100 text-indigo-700 rounded-full">
+       <i class="fas fa-book fa-2x">
+       </i>
+      </div>
+      <div>
+       <p class="text-sm font-medium text-gray-500">
+        Total Books
+       </p>
+       <p class="text-2xl font-semibold text-gray-900" id="total-books-count">
+        1,245
+       </p>
+      </div>
+     </div>
+     <div class="bg-white rounded-lg shadow p-6 flex items-center space-x-4">
+      <div class="p-3 bg-green-100 text-green-700 rounded-full">
+       <i class="fas fa-user-graduate fa-2x">
+       </i>
+      </div>
+      <div>
+       <p class="text-sm font-medium text-gray-500">
+        Registered Students
+       </p>
+       <p class="text-2xl font-semibold text-gray-900" id="total-students-count">
+        532
+       </p>
+      </div>
+     </div>
+     <div class="bg-white rounded-lg shadow p-6 flex items-center space-x-4">
+      <div class="p-3 bg-yellow-100 text-yellow-700 rounded-full">
+       <i class="fas fa-book-reader fa-2x">
+       </i>
+      </div>
+      <div>
+       <p class="text-sm font-medium text-gray-500">
+        Books Issued Today
+       </p>
+       <p class="text-2xl font-semibold text-gray-900" id="books-issued-today-count">
+        37
+       </p>
+      </div>
+     </div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+     <!-- Alerts for Due Books -->
+     <div class="bg-white rounded-lg shadow p-6">
+      <h3 class="text-xl font-semibold text-gray-900 mb-4 flex items-center space-x-2">
+       <i class="fas fa-exclamation-triangle text-yellow-500">
+       </i>
+       <span>
+        Due Books Alerts
+       </span>
+      </h3>
+      <ul class="divide-y divide-gray-200 max-h-64 overflow-y-auto scrollbar-thin" id="due-books-list">
+       <li class="py-3 flex justify-between items-center">
+        <div>
+         
+
+         <!-- Alart system -->
+      </ul>
+     </div>
+     <!-- Calendar View for Issue/Return Dates -->
+     <div class="bg-white rounded-lg shadow p-6">
+      <h3 class="text-xl font-semibold text-gray-900 mb-4 flex items-center space-x-2">
+       <i class="fas fa-calendar-alt text-indigo-600">
+       </i>
+       <span>
+        Issue/Return Calendar
+       </span>
+      </h3>
+      <div class="overflow-x-auto">
+       <table class="w-full border-collapse text-sm text-gray-700">
+        <thead>
+         <tr class="bg-indigo-100 text-indigo-700">
+        <!-- Calendar Dates -->
+         </tr>
+        </tbody>
+       </table>
+       <p class="mt-2 text-xs text-gray-500 italic">
+        <span class="inline-block w-4 h-4 bg-indigo-600 rounded-full mr-1 align-middle">
+        </span>
+        Issue Date
+        <span class="inline-block w-4 h-4 bg-green-600 rounded-full ml-4 mr-1 align-middle">
+        </span>
+        Return Date
+       </p>
+      </div>
+     </div>
+    </div>
+   </section>
+   <!-- Books Section -->
+   <section class="mb-12" id="books">
+    <h2 class="text-3xl font-semibold text-gray-900 mb-6">
+     Books
+    </h2>
+    <div class="bg-white rounded-lg shadow p-6">
+     <form aria-label="Book search and filters" class="flex flex-col md:flex-row md:items-center md:space-x-4 space-y-4 md:space-y-0 mb-6" id="book-search-form">
+      <input aria-label="Search books by title, author, or ISBN" class="flex-grow border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm" id="book-search-input" placeholder="Search by title, author, or ISBN" type="text"/>
+      <select aria-label="Filter by category" class="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm" id="book-category-filter">
+       <option value="">
+        All Categories
+       </option>
+       <option>
+        Fiction
+       </option>
+       <option>
+        Non-fiction
+       </option>
+       <option>
+        Science
+       </option>
+       <option>
+        History
+       </option>
+       <option>
+        Biography
+       </option>
+       <option>
+        Technology
+       </option>
+      </select>
+      <select aria-label="Filter by availability" class="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm" id="book-availability-filter">
+       <option value="">
+        All Availability
+       </option>
+       <option value="available">
+        Available
+       </option>
+       <option value="issued">
+        Issued
+       </option>
+      </select>
+      <button aria-label="Search books" class="bg-indigo-600 text-white px-5 py-2 rounded-md text-sm font-semibold hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500" type="submit">
+       Search
+      </button>
+     </form>
+     <div class="overflow-x-auto">
+      <table class="w-full border-collapse text-sm text-gray-700" id="books-table">
+       <thead>
+        <tr class="bg-indigo-100 text-indigo-700">
+         <th class="border border-indigo-200 px-3 py-2 text-left">
+          Cover
+         </th>
+         <th class="border border-indigo-200 px-3 py-2 text-left">
+          Title
+         </th>
+         <th class="border border-indigo-200 px-3 py-2 text-left">
+          Author
+         </th>
+         <th class="border border-indigo-200 px-3 py-2 text-left">
+          Category
+         </th>
+         <th class="border border-indigo-200 px-3 py-2 text-center">
+          Availability
+         </th>
+         <th class="border border-indigo-200 px-3 py-2 text-center">
+          Actions
+         </th>
+        </tr>
+       </thead>
+       <tbody id="books-tbody">
+        <!-- Books rows inserted by JS -->
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </section>
+   <!-- Issue History Section -->
+   <section class="mb-12" id="issue-history">
+    <h2 class="text-3xl font-semibold text-gray-900 mb-6">
+     My Issue History
+    </h2>
+    <div class="bg-white rounded-lg shadow p-6 overflow-x-auto scrollbar-thin">
+     <table class="w-full border-collapse text-sm text-gray-700" id="issue-history-table">
+      <thead>
+       <tr class="bg-indigo-100 text-indigo-700">
+        <th class="border border-indigo-200 px-3 py-2 text-left">
+         Book Title
+        </th>
+        <th class="border border-indigo-200 px-3 py-2 text-left">
+         Issue Date
+        </th>
+        <th class="border border-indigo-200 px-3 py-2 text-left">
+         Return Date
+        </th>
+        <th class="border border-indigo-200 px-3 py-2 text-center">
+         Status
+        </th>
+       </tr>
+      </thead>
+      <tbody id="issue-history-tbody">
+       <tr class="hover:bg-indigo-50">
+       
+       </tr>
+      </tbody>
+     </table>
+    </div>
+   </section>
+   <!-- Admin Panel Section -->
+   <section class="mb-12" id="admin">
+    <h2 class="text-3xl font-semibold text-gray-900 mb-6">
+     Admin Panel
+    </h2>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+     <!-- Manage Books -->
+     <div class="bg-white rounded-lg shadow p-6">
+      <h3 class="text-2xl font-semibold text-gray-900 mb-4">
+       Manage Books
+      </h3>
+      <button aria-label="Add new book" class="mb-4 bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-semibold hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500" id="add-book-button">
+       <i class="fas fa-plus mr-2">
+       </i>
+       Add New Book
+      </button>
+      <div class="overflow-x-auto max-h-96 scrollbar-thin">
+       <table class="w-full border-collapse text-sm text-gray-700" id="admin-books-table">
+        <thead>
+         <tr class="bg-indigo-100 text-indigo-700">
+          <th class="border border-indigo-200 px-3 py-2 text-left">
+           Title
+          </th>
+          <th class="border border-indigo-200 px-3 py-2 text-left">
+           Author
+          </th>
+          <th class="border border-indigo-200 px-3 py-2 text-left">
+           Category
+          </th>
+          <th class="border border-indigo-200 px-3 py-2 text-center">
+           Actions
+          </th>
+         </tr>
+        </thead>
+        <tbody id="admin-books-tbody">
+         <!-- Admin books rows inserted by JS -->
+        </tbody>
+       </table>
+      </div>
+     </div>
+     <!-- Manage Students -->
+     <div class="bg-white rounded-lg shadow p-6">
+      <h3 class="text-2xl font-semibold text-gray-900 mb-4">
+       Manage Students
+      </h3>
+      <button aria-label="Add new student" class="mb-4 bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-semibold hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500" id="add-student-button">
+       <i class="fas fa-user-plus mr-2">
+       </i>
+       Add New Student
+      </button>
+      <div class="overflow-x-auto max-h-96 scrollbar-thin">
+       <table class="w-full border-collapse text-sm text-gray-700" id="admin-students-table">
+        <thead>
+         <tr class="bg-indigo-100 text-indigo-700">
+          <th class="border border-indigo-200 px-3 py-2 text-left">
+           Student Name
+          </th>
+          <th class="border border-indigo-200 px-3 py-2 text-left">
+           Email
+          </th>
+          <th class="border border-indigo-200 px-3 py-2 text-left">
+           Enrollment No.
+          </th>
+          <th class="border border-indigo-200 px-3 py-2 text-center">
+           Actions
+          </th>
+         </tr>
+        </thead>
+        <tbody id="admin-students-tbody">
+         <!-- Admin students rows inserted by JS -->
+        </tbody>
+       </table>
+      </div>
+     </div>
+    </div>
+    <!-- Reports Section -->
+    <div class="bg-white rounded-lg shadow p-6 mt-10">
+     <h3 class="text-2xl font-semibold text-gray-900 mb-4">
+      Generate Reports
+     </h3>
+     <form aria-label="Generate issue and return reports" class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end" id="report-form">
+      <div>
+       <label class="block text-sm font-medium text-gray-700 mb-1" for="report-type">
+        Report Type
+       </label>
+       <select class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm" id="report-type" required>
+        <option value="issue">
+         Issue Report
+        </option>
+        <option value="return">
+         Return Report
+        </option>
+        <option value="overdue">
+         Overdue Report
+        </option>
+       </select>
+      </div>
+      <div>
+       <label class="block text-sm font-medium text-gray-700 mb-1" for="start-date">
+        Start Date
+       </label>
+       <input class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm" id="start-date" type="date" required/>
+      </div>
+      <div>
+       <label class="block text-sm font-medium text-gray-700 mb-1" for="end-date">
+        End Date
+       </label>
+       <input class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm" id="end-date" type="date" required/>
+      </div>
+      <div class="md:col-span-3">
+       <button aria-label="Generate report" class="bg-indigo-600 text-white px-6 py-2 rounded-md text-sm font-semibold hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500" type="submit">
+        Generate Report
+       </button>
+      </div>
+     </form>
+     <div class="mt-6" id="report-output" role="region" aria-live="polite"></div>
+    </div>
+   </section>
+  </main>
+  <footer class="bg-white border-t border-gray-200 py-4 text-center text-gray-500 text-sm select-none">
+   © 2025 Online Library Management System. All rights reserved.
+  </footer>
+
+  <!-- Modals -->
+  <!-- Book Modal -->
+  <div aria-hidden="true" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden" id="book-modal">
+   <div class="bg-white rounded-lg shadow-lg max-w-md w-full p-6 relative">
+    <h3 class="text-xl font-semibold text-gray-900 mb-4" id="book-modal-title">
+     Add New Book
+    </h3>
+    <form id="book-form" class="space-y-4">
+     <div>
+      <label class="block text-sm font-medium text-gray-700 mb-1" for="book-title-input">
+       Title
+      </label>
+      <input class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm" id="book-title-input" name="title" required type="text"/>
+     </div>
+     <div>
+      <label class="block text-sm font-medium text-gray-700 mb-1" for="book-author-input">
+       Author
+      </label>
+      <input class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm" id="book-author-input" name="author" required type="text"/>
+     </div>
+     <div>
+      <label class="block text-sm font-medium text-gray-700 mb-1" for="book-category-input">
+       Category
+      </label>
+      <select class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm" id="book-category-input" name="category" required>
+       <option value="" disabled selected>
+        Select category
+       </option>
+       <option>
+        Fiction
+       </option>
+       <option>
+        Non-fiction
+       </option>
+       <option>
+        Science
+       </option>
+       <option>
+        History
+       </option>
+       <option>
+        Biography
+       </option>
+       <option>
+        Technology
+       </option>
+      </select>
+     </div>
+     <div>
+      <label class="block text-sm font-medium text-gray-700 mb-1" for="book-availability-input">
+       Availability
+      </label>
+      <select class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm" id="book-availability-input" name="availability" required>
+       <option value="available">
+        Available
+       </option>
+       <option value="issued">
+        Issued
+       </option>
+      </select>
+     </div>
+     <div>
+      <label class="block text-sm font-medium text-gray-700 mb-1" for="book-cover-input">
+       Cover Image URL
+      </label>
+      <input class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm" id="book-cover-input" name="cover" placeholder="https://example.com/image.jpg" type="url"/>
+     </div>
+     <div class="flex justify-end space-x-3 pt-4 border-t border-gray-200">
+      <button class="px-4 py-2 rounded-md bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold focus:outline-none focus:ring-2 focus:ring-gray-400" id="book-modal-cancel" type="button">
+       Cancel
+      </button>
+      <button class="px-4 py-2 rounded-md bg-indigo-600 hover:bg-indigo-700 text-white font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500" type="submit" id="book-modal-submit">
+       Save
+      </button>
+     </div>
+    </form>
+   </div>
+  </div>
+
+  <!-- Student Modal -->
+  <div aria-hidden="true" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden" id="student-modal">
+   <div class="bg-white rounded-lg shadow-lg max-w-md w-full p-6 relative">
+    <h3 class="text-xl font-semibold text-gray-900 mb-4" id="student-modal-title">
+     Add New Student
+    </h3>
+    <form id="student-form" class="space-y-4">
+     <div>
+      <label class="block text-sm font-medium text-gray-700 mb-1" for="student-name-input">
+       Student Name
+      </label>
+      <input class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm" id="student-name-input" name="name" required type="text"/>
+     </div>
+     <div>
+      <label class="block text-sm font-medium text-gray-700 mb-1" for="student-email-input">
+       Email
+      </label>
+      <input class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm" id="student-email-input" name="email" required type="email"/>
+     </div>
+     <div>
+      <label class="block text-sm font-medium text-gray-700 mb-1" for="student-enrollment-input">
+       Enrollment No.
+      </label>
+      <input class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm" id="student-enrollment-input" name="enrollment" required type="text"/>
+     </div>
+     <div class="flex justify-end space-x-3 pt-4 border-t border-gray-200">
+      <button class="px-4 py-2 rounded-md bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold focus:outline-none focus:ring-2 focus:ring-gray-400" id="student-modal-cancel" type="button">
+       Cancel
+      </button>
+      <button class="px-4 py-2 rounded-md bg-indigo-600 hover:bg-indigo-700 text-white font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500" type="submit" id="student-modal-submit">
+       Save
+      </button>
+     </div>
+    </form>
+   </div>
+  </div>
+<script src="online_libery.js"></script>
+ </body>
+ 
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoodieHub - Order Delicious Food Online</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="food order.css" />
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">
+                <i class="fas fa-utensils"></i>
+                FoodieHub
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="cart-btn" onclick="toggleCart()">
+                <i class="fas fa-shopping-cart"></i>
+                Cart
+                <span class="cart-count" id="cartCount">0</span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Delicious Food Delivered</h1>
+            <p>Order your favorite meals from the best restaurants in town. Fast delivery, fresh ingredients, amazing taste!</p>
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Search for food, restaurants..." id="searchInput">
+                <button class="search-btn" onclick="searchFood()">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="categories">
+        <div class="container">
+            <h2 class="section-title">Food Categories</h2>
+            <div class="category-grid" id="categoryGrid">
+                <div class="category-card active" data-category="all">
+                    <div class="category-icon">🍽️</div>
+                    <div class="category-name">All Items</div>
+                </div>
+                <div class="category-card" data-category="pizza">
+                    <div class="category-icon">🍕</div>
+                    <div class="category-name">Pizza</div>
+                </div>
+                <div class="category-card" data-category="burger">
+                    <div class="category-icon">🍔</div>
+                    <div class="category-name">Burgers</div>
+                </div>
+                <div class="category-card" data-category="pasta">
+                    <div class="category-icon">🍝</div>
+                    <div class="category-name">Pasta</div>
+                </div>
+                <div class="category-card" data-category="dessert">
+                    <div class="category-icon">🍰</div>
+                    <div class="category-name">Desserts</div>
+                </div>
+                <div class="category-card" data-category="drink">
+                    <div class="category-icon">🥤</div>
+                    <div class="category-name">Drinks</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu -->
+    <section class="menu" id="menu">
+        <div class="container">
+            <h2 class="section-title">Our Menu</h2>
+            <div class="menu-grid" id="menuGrid">
+                <!-- Menu items will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3 class="cart-title">Your Order</h3>
+            <button class="close-cart" onclick="toggleCart()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="empty-cart">
+                <i class="fas fa-shopping-cart"></i>
+                <p>Your cart is empty</p>
+                <p>Add some delicious items!</p>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total: </span>
+                <span id="cartTotal">$0.00</span>
+            </div>
+            <button class="checkout-btn" id="checkoutBtn" onclick="checkout()" disabled>
+                Proceed to Checkout
+            </button>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay" onclick="toggleCart()"></div>
+
+    <!-- Success Message -->
+    <div class="success-message" id="successMessage">
+        <i class="fas fa-check-circle"></i>
+        Item added to cart!
+    </div>
+
+   <script src="food order.js"></script>
+</body>
+</html>

@@ -1,0 +1,258 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Survey Form with Result Storage</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+  />
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col items-center p-4">
+  <h1 class="text-3xl font-bold mb-6 text-center text-gray-800">Survey Form</h1>
+  <form
+    id="surveyForm"
+    class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-6 w-full max-w-lg"
+  >
+    <div class="mb-4">
+      <label
+        class="block text-gray-700 text-sm font-bold mb-2"
+        for="name"
+        >Full Name</label
+      >
+      <input
+        id="name"
+        name="name"
+        type="text"
+        placeholder="Your full name"
+        required
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+      />
+    </div>
+
+    <div class="mb-4">
+      <label
+        class="block text-gray-700 text-sm font-bold mb-2"
+        for="email"
+        >Email Address</label
+      >
+      <input
+        id="email"
+        name="email"
+        type="email"
+        placeholder="you@example.com"
+        required
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+      />
+    </div>
+
+    <div class="mb-4">
+      <label
+        class="block text-gray-700 text-sm font-bold mb-2"
+        for="age"
+        >Age</label
+      >
+      <input
+        id="age"
+        name="age"
+        type="number"
+        min="1"
+        max="120"
+        placeholder="Your age"
+        required
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+      />
+    </div>
+
+    <div class="mb-4">
+      <span class="block text-gray-700 text-sm font-bold mb-2"
+        >Gender</span
+      >
+      <label class="inline-flex items-center mr-6">
+        <input
+          type="radio"
+          class="form-radio text-indigo-600"
+          name="gender"
+          value="Male"
+          required
+        />
+        <span class="ml-2 text-gray-700">Male</span>
+      </label>
+      <label class="inline-flex items-center mr-6">
+        <input
+          type="radio"
+          class="form-radio text-indigo-600"
+          name="gender"
+          value="Female"
+          required
+        />
+        <span class="ml-2 text-gray-700">Female</span>
+      </label>
+      <label class="inline-flex items-center">
+        <input
+          type="radio"
+          class="form-radio text-indigo-600"
+          name="gender"
+          value="Other"
+          required
+        />
+        <span class="ml-2 text-gray-700">Other</span>
+      </label>
+    </div>
+
+    <div class="mb-4">
+      <label
+        for="satisfaction"
+        class="block text-gray-700 text-sm font-bold mb-2"
+        >How satisfied are you with our service?</label
+      >
+      <select
+        id="satisfaction"
+        name="satisfaction"
+        required
+        class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+      >
+        <option value="" disabled selected>Select an option</option>
+        <option value="Very Satisfied">Very Satisfied</option>
+        <option value="Satisfied">Satisfied</option>
+        <option value="Neutral">Neutral</option>
+        <option value="Dissatisfied">Dissatisfied</option>
+        <option value="Very Dissatisfied">Very Dissatisfied</option>
+      </select>
+    </div>
+
+    <div class="mb-6">
+      <label
+        for="comments"
+        class="block text-gray-700 text-sm font-bold mb-2"
+        >Additional Comments</label
+      >
+      <textarea
+        id="comments"
+        name="comments"
+        rows="4"
+        placeholder="Your comments here..."
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline resize-none"
+      ></textarea>
+    </div>
+
+    <div class="flex items-center justify-between">
+      <button
+        type="submit"
+        class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+      >
+        Submit
+      </button>
+      <button
+        type="button"
+        id="clearStorage"
+        class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+      >
+        Clear Stored Results
+      </button>
+    </div>
+  </form>
+
+  <section class="w-full max-w-lg bg-white shadow-md rounded px-8 pt-6 pb-8">
+    <h2 class="text-2xl font-semibold mb-4 text-gray-800 text-center">
+      Submitted Survey Results
+    </h2>
+    <div id="resultsContainer" class="space-y-4 max-h-96 overflow-y-auto">
+      <p class="text-gray-500 text-center">No survey results submitted yet.</p>
+    </div>
+  </section>
+
+  <script>
+    const form = document.getElementById("surveyForm");
+    const resultsContainer = document.getElementById("resultsContainer");
+    const clearStorageBtn = document.getElementById("clearStorage");
+
+    // Load stored results from localStorage and display them
+    function loadResults() {
+      const storedResults = JSON.parse(localStorage.getItem("surveyResults")) || [];
+      resultsContainer.innerHTML = "";
+      if (storedResults.length === 0) {
+        resultsContainer.innerHTML =
+          '<p class="text-gray-500 text-center">No survey results submitted yet.</p>';
+        return;
+      }
+
+      storedResults.forEach((result, index) => {
+        const resultCard = document.createElement("div");
+        resultCard.className =
+          "border border-gray-300 rounded p-4 bg-gray-50 shadow-sm";
+
+        resultCard.innerHTML = `
+          <p><span class="font-semibold text-indigo-700">#${index + 1} - Name:</span> ${escapeHtml(
+            result.name
+          )}</p>
+          <p><span class="font-semibold text-indigo-700">Email:</span> ${escapeHtml(
+            result.email
+          )}</p>
+          <p><span class="font-semibold text-indigo-700">Age:</span> ${escapeHtml(
+            result.age
+          )}</p>
+          <p><span class="font-semibold text-indigo-700">Gender:</span> ${escapeHtml(
+            result.gender
+          )}</p>
+          <p><span class="font-semibold text-indigo-700">Satisfaction:</span> ${escapeHtml(
+            result.satisfaction
+          )}</p>
+          <p><span class="font-semibold text-indigo-700">Comments:</span> ${escapeHtml(
+            result.comments || "None"
+          )}</p>
+        `;
+        resultsContainer.appendChild(resultCard);
+      });
+    }
+
+    // Escape HTML to prevent XSS
+    function escapeHtml(text) {
+      if (!text) return "";
+      return text
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+      const surveyResult = {
+        name: formData.get("name").trim(),
+        email: formData.get("email").trim(),
+        age: formData.get("age").trim(),
+        gender: formData.get("gender"),
+        satisfaction: formData.get("satisfaction"),
+        comments: formData.get("comments").trim(),
+      };
+
+      // Retrieve existing results or initialize empty array
+      const storedResults = JSON.parse(localStorage.getItem("surveyResults")) || [];
+      storedResults.push(surveyResult);
+      localStorage.setItem("surveyResults", JSON.stringify(storedResults));
+
+      form.reset();
+      loadResults();
+    });
+
+    clearStorageBtn.addEventListener("click", () => {
+      if (
+        confirm(
+          "Are you sure you want to clear all stored survey results? This action cannot be undone."
+        )
+      ) {
+        localStorage.removeItem("surveyResults");
+        loadResults();
+      }
+    });
+
+    // Initial load
+    loadResults();
+  </script>
+</body>
+</html>

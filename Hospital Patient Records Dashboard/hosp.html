@@ -1,0 +1,417 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Hospital Patient Records
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+ </head>
+ <body class="bg-gray-50 min-h-screen flex flex-col">
+  <header class="bg-white shadow">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
+    <div class="flex items-center space-x-3">
+     <img alt="Hospital logo with letter H in white on blue background" class="rounded-full" height="40" src="https://storage.googleapis.com/a1aa/image/bf4119de-70b8-4c36-8deb-95214361b25f.jpg" width="40"/>
+     <h1 class="text-xl font-semibold text-blue-700">
+      Hospital Patient Records
+     </h1>
+    </div>
+    <nav class="hidden md:flex space-x-6 text-gray-700 font-medium">
+     <a class="hover:text-blue-600 transition" href="#patients">
+      Patients
+     </a>
+     <a class="hover:text-blue-600 transition" href="#doctors">
+      Doctors
+     </a>
+     <a class="hover:text-blue-600 transition" href="#appointments">
+      Appointments
+     </a>
+    </nav>
+    <button aria-label="Open menu" class="md:hidden text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-600" id="mobile-menu-button">
+     <i class="fas fa-bars fa-lg">
+     </i>
+    </button>
+   </div>
+   <nav aria-label="Mobile menu" class="md:hidden bg-white border-t border-gray-200 hidden" id="mobile-menu">
+    <a class="block px-4 py-2 text-gray-700 hover:bg-blue-50" href="#patients">
+     Patients
+    </a>
+    <a class="block px-4 py-2 text-gray-700 hover:bg-blue-50" href="#doctors">
+     Doctors
+    </a>
+    <a class="block px-4 py-2 text-gray-700 hover:bg-blue-50" href="#appointments">
+     Appointments
+    </a>
+   </nav>
+  </header>
+  <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+   <!-- Patients Section -->
+   <section class="mb-16" id="patients">
+    <h2 class="text-3xl font-semibold text-blue-700 mb-6">
+     Patients
+    </h2>
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4 space-y-4 md:space-y-0">
+     <form aria-label="Search patients" class="flex w-full md:w-1/3" id="patient-search-form" role="search">
+      <input class="w-full rounded-l-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600" id="patient-search" name="search" placeholder="Search patients by name or ID" type="search"/>
+      <button aria-label="Search patients" class="bg-blue-600 hover:bg-blue-700 text-white px-4 rounded-r-md focus:outline-none focus:ring-2 focus:ring-blue-600" type="submit">
+       <i class="fas fa-search">
+       </i>
+      </button>
+     </form>
+     <button aria-haspopup="dialog" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md flex items-center space-x-2 focus:outline-none focus:ring-2 focus:ring-green-600" id="add-patient-btn">
+      <i class="fas fa-plus">
+      </i>
+      <span>
+       Add Patient
+      </span>
+     </button>
+    </div>
+    <div class="overflow-x-auto rounded-lg border border-gray-300 bg-white shadow-sm">
+     <table aria-describedby="patient-table-description" class="min-w-full divide-y divide-gray-200">
+      <caption class="sr-only" id="patient-table-description">
+       List of patients with their details
+      </caption>
+      <thead class="bg-blue-100">
+       <tr>
+        <th class="px-4 py-3 text-left text-sm font-semibold text-blue-700" scope="col">
+         ID
+        </th>
+        <th class="px-4 py-3 text-left text-sm font-semibold text-blue-700" scope="col">
+         Name
+        </th>
+        <th class="px-4 py-3 text-left text-sm font-semibold text-blue-700" scope="col">
+         Age
+        </th>
+        <th class="px-4 py-3 text-left text-sm font-semibold text-blue-700" scope="col">
+         Gender
+        </th>
+        <th class="px-4 py-3 text-left text-sm font-semibold text-blue-700" scope="col">
+         Contact
+        </th>
+        <th class="px-4 py-3 text-left text-sm font-semibold text-blue-700" scope="col">
+         Actions
+        </th>
+       </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-100" id="patient-table-body">
+       
+       
+      </tbody>
+     </table>
+    </div>
+   </section>
+   <!-- Doctors Section -->
+   <section class="mb-16" id="doctors">
+    <h2 class="text-3xl font-semibold text-blue-700 mb-6">
+     Doctors
+    </h2>
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4 space-y-4 md:space-y-0">
+     <form aria-label="Search doctors" class="flex w-full md:w-1/3" id="doctor-search-form" role="search">
+      <input class="w-full rounded-l-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600" id="doctor-search" name="search" placeholder="Search doctors by name or specialty" type="search"/>
+      <button aria-label="Search doctors" class="bg-blue-600 hover:bg-blue-700 text-white px-4 rounded-r-md focus:outline-none focus:ring-2 focus:ring-blue-600" type="submit">
+       <i class="fas fa-search">
+       </i>
+      </button>
+     </form>
+     <button aria-haspopup="dialog" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md flex items-center space-x-2 focus:outline-none focus:ring-2 focus:ring-green-600" id="add-doctor-btn">
+      <i class="fas fa-plus">
+      </i>
+      <span>
+       Add Doctor
+      </span>
+     </button>
+    </div>
+    <div class="overflow-x-auto rounded-lg border border-gray-300 bg-white shadow-sm">
+     <table aria-describedby="doctor-table-description" class="min-w-full divide-y divide-gray-200">
+      <caption class="sr-only" id="doctor-table-description">
+       List of doctors with their details
+      </caption>
+      <thead class="bg-blue-100">
+       <tr>
+        <th class="px-4 py-3 text-left text-sm font-semibold text-blue-700" scope="col">
+         ID
+        </th>
+        <th class="px-4 py-3 text-left text-sm font-semibold text-blue-700" scope="col">
+         Name
+        </th>
+        <th class="px-4 py-3 text-left text-sm font-semibold text-blue-700" scope="col">
+         Specialty
+        </th>
+        <th class="px-4 py-3 text-left text-sm font-semibold text-blue-700" scope="col">
+         Contact
+        </th>
+        <th class="px-4 py-3 text-left text-sm font-semibold text-blue-700" scope="col">
+         Actions
+        </th>
+       </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-100" id="doctor-table-body">
+      
+       
+      </tbody>
+     </table>
+    </div>
+   </section>
+   <!-- Appointments Section -->
+   <section class="mb-16" id="appointments">
+    <h2 class="text-3xl font-semibold text-blue-700 mb-6">
+     Appointments
+    </h2>
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4 space-y-4 md:space-y-0">
+     <form aria-label="Search appointments" class="flex w-full md:w-1/3" id="appointment-search-form" role="search">
+      <input class="w-full rounded-l-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600" id="appointment-search" name="search" placeholder="Search appointments by patient or doctor" type="search"/>
+      <button aria-label="Search appointments" class="bg-blue-600 hover:bg-blue-700 text-white px-4 rounded-r-md focus:outline-none focus:ring-2 focus:ring-blue-600" type="submit">
+       <i class="fas fa-search">
+       </i>
+      </button>
+     </form>
+     <button aria-haspopup="dialog" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md flex items-center space-x-2 focus:outline-none focus:ring-2 focus:ring-green-600" id="add-appointment-btn">
+      <i class="fas fa-plus">
+      </i>
+      <span>
+       Add Appointment
+      </span>
+     </button>
+    </div>
+    <div class="overflow-x-auto rounded-lg border border-gray-300 bg-white shadow-sm">
+     <table aria-describedby="appointment-table-description" class="min-w-full divide-y divide-gray-200">
+      <caption class="sr-only" id="appointment-table-description">
+       List of appointments with their details
+      </caption>
+      <thead class="bg-blue-100">
+       <tr>
+        <th class="px-4 py-3 text-left text-sm font-semibold text-blue-700" scope="col">
+         ID
+        </th>
+        <th class="px-4 py-3 text-left text-sm font-semibold text-blue-700" scope="col">
+         Patient
+        </th>
+        <th class="px-4 py-3 text-left text-sm font-semibold text-blue-700" scope="col">
+         Doctor
+        </th>
+        <th class="px-4 py-3 text-left text-sm font-semibold text-blue-700" scope="col">
+         Date
+        </th>
+        <th class="px-4 py-3 text-left text-sm font-semibold text-blue-700" scope="col">
+         Time
+        </th>
+        <th class="px-4 py-3 text-left text-sm font-semibold text-blue-700" scope="col">
+         Actions
+        </th>
+       </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-100" id="appointment-table-body">
+      
+      </tbody>
+     </table>
+    </div>
+   </section>
+  </main>
+  <footer class="bg-white border-t border-gray-200 py-6 mt-auto">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-500 text-sm">
+    © 2024 Hospital Patient Records. All rights reserved.
+   </div>
+  </footer>
+
+  <!-- Modal Overlay -->
+  <div aria-hidden="true" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50" id="modal-overlay"></div>
+
+  <!-- Patient Modal -->
+  <div aria-modal="true" aria-labelledby="patient-modal-title" aria-describedby="patient-modal-desc" class="fixed inset-0 flex items-center justify-center p-4 hidden z-50" id="patient-modal" role="dialog">
+   <div class="bg-white rounded-lg shadow-lg max-w-md w-full">
+    <header class="flex justify-between items-center border-b border-gray-200 px-6 py-4">
+     <h3 class="text-xl font-semibold text-blue-700" id="patient-modal-title">
+      Add Patient
+     </h3>
+     <button aria-label="Close patient modal" class="text-gray-600 hover:text-gray-900 focus:outline-none" id="close-patient-modal">
+      <i class="fas fa-times fa-lg">
+      </i>
+     </button>
+    </header>
+    <form class="px-6 py-4 space-y-4" id="patient-form">
+     <div>
+      <label class="block text-sm font-medium text-gray-700" for="patient-id">
+       Patient ID
+      </label>
+      <input class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600" id="patient-id" name="patientId" required="" type="text"/>
+     </div>
+     <div>
+      <label class="block text-sm font-medium text-gray-700" for="patient-name">
+       Name
+      </label>
+      <input class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600" id="patient-name" name="patientName" required="" type="text"/>
+     </div>
+     <div>
+      <label class="block text-sm font-medium text-gray-700" for="patient-age">
+       Age
+      </label>
+      <input class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600" id="patient-age" min="0" name="patientAge" required="" type="number"/>
+     </div>
+     <div>
+      <label class="block text-sm font-medium text-gray-700" for="patient-gender">
+       Gender
+      </label>
+      <select class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600" id="patient-gender" name="patientGender" required="">
+       <option value="">
+        Select gender
+       </option>
+       <option value="Male">
+        Male
+       </option>
+       <option value="Female">
+        Female
+       </option>
+       <option value="Other">
+        Other
+       </option>
+      </select>
+     </div>
+     <div>
+      <label class="block text-sm font-medium text-gray-700" for="patient-contact">
+       Contact
+      </label>
+      <input class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600" id="patient-contact" name="patientContact" required="" type="tel" pattern="^\+?[0-9\s\-]{7,15}$" placeholder="+1 555-123-4567"/>
+     </div>
+     <div class="flex justify-end space-x-3 pt-4 border-t border-gray-200">
+      <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400" id="cancel-patient-btn" type="button">
+       Cancel
+      </button>
+      <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600" type="submit">
+       Save
+      </button>
+     </div>
+    </form>
+   </div>
+  </div>
+
+  <!-- Doctor Modal -->
+  <div aria-modal="true" aria-labelledby="doctor-modal-title" aria-describedby="doctor-modal-desc" class="fixed inset-0 flex items-center justify-center p-4 hidden z-50" id="doctor-modal" role="dialog">
+   <div class="bg-white rounded-lg shadow-lg max-w-md w-full">
+    <header class="flex justify-between items-center border-b border-gray-200 px-6 py-4">
+     <h3 class="text-xl font-semibold text-blue-700" id="doctor-modal-title">
+      Add Doctor
+     </h3>
+     <button aria-label="Close doctor modal" class="text-gray-600 hover:text-gray-900 focus:outline-none" id="close-doctor-modal">
+      <i class="fas fa-times fa-lg">
+      </i>
+     </button>
+    </header>
+    <form class="px-6 py-4 space-y-4" id="doctor-form">
+     <div>
+      <label class="block text-sm font-medium text-gray-700" for="doctor-id">
+       Doctor ID
+      </label>
+      <input class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600" id="doctor-id" name="doctorId" required="" type="text"/>
+     </div>
+     <div>
+      <label class="block text-sm font-medium text-gray-700" for="doctor-name">
+       Name
+      </label>
+      <input class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600" id="doctor-name" name="doctorName" required="" type="text"/>
+     </div>
+     <div>
+  <label class="block text-sm font-medium text-gray-700" for="doctor-specialty">
+    Specialty
+  </label>
+  <select class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600" id="doctor-specialty" name="doctorSpecialty" required>
+    <option value="" disabled selected>Select Specialty</option>
+    <option value="Cardiologist">Cardiologist</option>
+    <option value="Dermatologist">Dermatologist</option>
+    <option value="Neurologist">Neurologist</option>
+    <option value="Pediatrician">Pediatrician</option>
+    <option value="Psychiatrist">Psychiatrist</option>
+    <option value="Orthopedic">Orthopedic</option>
+    <option value="Gynecologist">Gynecologist</option>
+    <option value="General Surgeon">General Surgeon</option>
+    <option value="ENT Specialist">ENT Specialist</option>
+    <option value="Oncologist">Oncologist</option>
+  </select>
+</div>
+
+     <div>
+      <label class="block text-sm font-medium text-gray-700" for="doctor-contact">
+       Contact
+      </label>
+      <input class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600" id="doctor-contact" name="doctorContact" required="" type="tel" pattern="^\+?[0-9\s\-]{7,15}$" placeholder="+1 555-123-4567"/>
+     </div>
+     <div class="flex justify-end space-x-3 pt-4 border-t border-gray-200">
+      <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400" id="cancel-doctor-btn" type="button">
+       Cancel
+      </button>
+      <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600" type="submit">
+       Save
+      </button>
+     </div>
+    </form>
+   </div>
+  </div>
+
+  <!-- Appointment Modal -->
+  <div aria-modal="true" aria-labelledby="appointment-modal-title" aria-describedby="appointment-modal-desc" class="fixed inset-0 flex items-center justify-center p-4 hidden z-50" id="appointment-modal" role="dialog">
+   <div class="bg-white rounded-lg shadow-lg max-w-md w-full">
+    <header class="flex justify-between items-center border-b border-gray-200 px-6 py-4">
+     <h3 class="text-xl font-semibold text-blue-700" id="appointment-modal-title">
+      Add Appointment
+     </h3>
+     <button aria-label="Close appointment modal" class="text-gray-600 hover:text-gray-900 focus:outline-none" id="close-appointment-modal">
+      <i class="fas fa-times fa-lg">
+      </i>
+     </button>
+    </header>
+    <form class="px-6 py-4 space-y-4" id="appointment-form">
+     <div>
+      <label class="block text-sm font-medium text-gray-700" for="appointment-id">
+       Appointment ID
+      </label>
+      <input class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600" id="appointment-id" name="appointmentId" required="" type="text"/>
+     </div>
+     <div>
+      <label class="block text-sm font-medium text-gray-700" for="appointment-patient">
+       Patient
+      </label>
+      <select class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600" id="appointment-patient" name="appointmentPatient" required="">
+      </select>
+     </div>
+     <div>
+      <label class="block text-sm font-medium text-gray-700" for="appointment-doctor">
+       Doctor
+      </label>
+      <select class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600" id="appointment-doctor" name="appointmentDoctor" required="">
+      </select>
+     </div>
+     <div>
+      <label class="block text-sm font-medium text-gray-700" for="appointment-date">
+       Date
+      </label>
+      <input class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600" id="appointment-date" name="appointmentDate" required="" type="date"/>
+     </div>
+     <div>
+      <label class="block text-sm font-medium text-gray-700" for="appointment-time">
+       Time
+      </label>
+      <input class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600" id="appointment-time" name="appointmentTime" required="" type="time"/>
+     </div>
+     <div class="flex justify-end space-x-3 pt-4 border-t border-gray-200">
+      <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400" id="cancel-appointment-btn" type="button">
+       Cancel
+      </button>
+      <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600" type="submit">
+       Save
+      </button>
+     </div>
+    </form>
+   </div>
+  </div>
+
+  <script src="hosp.js"></script>
+  
+ </body>
+</html>

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avimart Furniture & Decoration</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-gift"></i>
+                    <span>Avimart</span>
+                </div>
+                
+                <div class="search-section">
+                    <button class="find-stores-btn">
+                        Find Stores <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <select class="category-select">
+                        <option>All Categories</option>
+                        <option>Furniture</option>
+                        <option>Outdoor</option>
+                        <option>Mattresses</option>
+                        <option>Rugs</option>
+                        <option>Lighting</option>
+                        <option>Art & Mirrors</option>
+                        <option>Pillows & Decor</option>
+                        <option>Bed & Bath</option>
+                    </select>
+                    <input type="search" class="search-input" placeholder="Search for products">
+                    <button class="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                
+                <div class="user-actions">
+                    <button class="user-btn">
+                        <i class="far fa-user"></i>
+                        <span>Account</span>
+                    </button>
+                    <button class="user-btn" id="wishlist-btn">
+                        <i class="far fa-heart"></i>
+                        <span>Wishlist</span>
+                        <span class="badge" id="wishlist-count">0</span>
+                    </button>
+                    <button class="user-btn" id="cart-btn">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Cart</span>
+                        <span class="badge" id="cart-count">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="navigation">
+        <div class="container">
+            <div class="nav-content">
+                <div class="nav-links">
+                    <a href="#" class="nav-link active">Shop By Department</a>
+                    <a href="#" class="nav-link">Home</a>
+                    <a href="#" class="nav-link">Top Deals</a>
+                    <a href="#" class="nav-link">Hot Offers</a>
+                    <a href="#" class="nav-link">New Arrivals</a>
+                    <a href="#" class="nav-link">Blog</a>
+                    <a href="#" class="nav-link">Gift Cards</a>
+                </div>
+                <div class="nav-right">
+                    <a href="#" class="nav-link">Recently Viewed</a>
+                    <a href="#" class="nav-link">Order Tracking</a>
+                    <a href="#" class="nav-link">USD $</a>
+                    <span class="hotline">Hotline: <strong>+01 1234 8888</strong></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Breadcrumb -->
+            <div class="breadcrumb">
+                Home / Furniture & Decoration
+            </div>
+
+            <!-- Page Title -->
+            <h1 class="page-title">Furniture & Decoration</h1>
+
+            <!-- Filters -->
+            <div class="filters">
+                <div class="view-toggle">
+                    <button class="view-btn active" data-view="grid">
+                        <i class="fas fa-th"></i>
+                    </button>
+                    <button class="view-btn" data-view="list">
+                        <i class="fas fa-th-list"></i>
+                    </button>
+                    <button class="view-btn" data-view="large">
+                        <i class="fas fa-th-large"></i>
+                    </button>
+                </div>
+
+                <select class="filter-select" id="category-filter">
+                    <option value="">All Categories</option>
+                    <option value="furniture">Furniture</option>
+                    <option value="decoration">Decoration</option>
+                    <option value="chair">Chair</option>
+                    <option value="table">Table</option>
+                    <option value="lamp">Lamp</option>
+                </select>
+
+                <select class="filter-select" id="brand-filter">
+                    <option value="">Featured Brands</option>
+                    <option value="benchma">Benchma (2)</option>
+                    <option value="floyd">Floyd (12)</option>
+                    <option value="arterio">Arterio (1)</option>
+                    <option value="poly">Poly & Bark (12)</option>
+                </select>
+
+                <select class="filter-select" id="discount-filter">
+                    <option value="">Discount</option>
+                    <option value="all">All Discounted</option>
+                    <option value="20">20% Off</option>
+                    <option value="30">30% Off</option>
+                </select>
+
+                <select class="filter-select" id="price-filter">
+                    <option value="">By Price</option>
+                    <option value="50-250">$50-$250</option>
+                    <option value="250-500">$250-$500</option>
+                    <option value="500-750">$500-$750</option>
+                    <option value="750-1000">$750-$1000</option>
+                </select>
+
+                <select class="filter-select" id="sort-filter">
+                    <option value="default">Default Sorting</option>
+                    <option value="popularity">Sort by popularity</option>
+                    <option value="rating">Sort by average rating</option>
+                    <option value="price-low">Price: low to high</option>
+                    <option value="price-high">Price: high to low</option>
+                </select>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="products-grid" id="products-grid">
+                <!-- Products will be dynamically loaded here -->
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <div class="pagination-info">
+                    <span id="pagination-info">1-20 of over 4,000 results</span>
+                </div>
+                <div class="pagination-controls">
+                    <button class="page-btn active">1</button>
+                    <button class="page-btn">2</button>
+                    <button class="page-btn">3</button>
+                    <button class="page-btn">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Brand Carousel -->
+    <section class="brand-carousel">
+        <div class="container">
+            <div class="carousel-container">
+                <button class="carousel-btn prev" id="brand-prev">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="carousel-track" id="brand-track">
+                    <img src="https://via.placeholder.com/100x40/666/fff?text=WIKIMEDIA" alt="WIKIMEDIA">
+                    <img src="https://via.placeholder.com/100x40/666/fff?text=Fortune" alt="Fortune">
+                    <img src="https://via.placeholder.com/100x40/666/fff?text=Atlantic" alt="The Atlantic">
+                    <img src="https://via.placeholder.com/100x40/666/fff?text=Kununu" alt="Kununu">
+                    <img src="https://via.placeholder.com/100x40/666/fff?text=ADLER" alt="ADLER">
+                    <img src="https://via.placeholder.com/100x40/666/fff?text=WIKIMEDIA" alt="WIKIMEDIA">
+                    <img src="https://via.placeholder.com/100x40/666/fff?text=Fortune" alt="Fortune">
+                    <img src="https://via.placeholder.com/100x40/666/fff?text=Atlantic" alt="The Atlantic">
+                </div>
+                <button class="carousel-btn next" id="brand-next">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Sidebars -->
+    <section class="product-sidebars">
+        <div class="container">
+            <div class="sidebars-grid">
+                <div class="sidebar-section">
+                    <h3>Related Products (08)</h3>
+                    <div class="sidebar-products" id="related-products">
+                        <!-- Related products will be loaded here -->
+                    </div>
+                </div>
+                <div class="sidebar-section">
+                    <h3>Top Selling Products (08)</h3>
+                    <div class="sidebar-products" id="top-selling-products">
+                        <!-- Top selling products will be loaded here -->
+                    </div>
+                </div>
+                <div class="sidebar-section">
+                    <h3>On-Sale Products (08)</h3>
+                    <div class="sidebar-products" id="on-sale-products">
+                        <!-- On-sale products will be loaded here -->
+                    </div>
+                </div>
+                <div class="sidebar-section">
+                    <h3>Featured Products (08)</h3>
+                    <div class="sidebar-products" id="featured-products">
+                        <!-- Featured products will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section contact">
+                    <div class="contact-info">
+                        <div class="help-line">
+                            <i class="fas fa-phone-alt"></i>
+                            <span>Need help? 24/7</span>
+                        </div>
+                        <div class="phone-number">001-1234-88888</div>
+                        <address>
+                            101 E 29th St, East Chicago, IN 46312, USA<br>
+                            Working 8:00AM - 22:00PM
+                        </address>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>About Us</h4>
+                    <ul>
+                        <li><a href="#">Find a Store</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Delivery Information</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">Gift Cards</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Customer Care</h4>
+                    <ul>
+                        <li><a href="#">Order Tracking</a></li>
+                        <li><a href="#">FAQ & Help</a></li>
+                        <li><a href="#">Shipping & Delivery</a></li>
+                        <li><a href="#">Return & Exchanges</a></li>
+                        <li><a href="#">Repairs & Warranty</a></li>
+                        <li><a href="#">Wish List</a></li>
+                        <li><a href="#">My Account</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Find It Fast</h4>
+                    <ul>
+                        <li><a href="#">TV & Home Theater</a></li>
+                        <li><a href="#">Computers & Laptop</a></li>
+                        <li><a href="#">Smart Phones</a></li>
+                        <li><a href="#">Cameras & Accessories</a></li>
+                        <li><a href="#">Audio & Video Games</a></li>
+                        <li><a href="#">Clothes & Music</a></li>
+                        <li><a href="#">Car Electronics & GPS</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="copyright">
+                    © 2021 Avimart. All Rights Reserved.
+                </div>
+                <div class="payment-methods">
+                    <img src="https://via.placeholder.com/40x20/666/fff?text=VISA" alt="Visa">
+                    <img src="https://via.placeholder.com/40x20/666/fff?text=PP" alt="PayPal">
+                    <img src="https://via.placeholder.com/40x20/666/fff?text=SK" alt="Skrill">
+                    <img src="https://via.placeholder.com/40x20/666/fff?text=OM" alt="Omni">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Modal -->
+    <div class="modal" id="cart-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Shopping Cart</h3>
+                <button class="close-btn" id="close-cart">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="cart-items"></div>
+                <div class="cart-total">
+                    <strong>Total: $<span id="cart-total">0.00</span></strong>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="close-cart-btn">Continue Shopping</button>
+                <button class="btn btn-primary" id="checkout-btn">Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Wishlist Modal -->
+    <div class="modal" id="wishlist-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Wishlist</h3>
+                <button class="close-btn" id="close-wishlist">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="wishlist-items"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="close-wishlist-btn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

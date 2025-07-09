@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">CollegeAttendanceApp</string>
+        <string name="add_student">Add Student</string>
+        <string name="mark_attendance">Mark Attendance</string>
+        <string name="view_reports">View Reports</string>
+        <string name="name_hint">Name</string>
+        <string name="roll_number_hint">Roll Number</string>
+        <string name="add_button">Add</string>
+        <string name="submit_attendance">Submit Attendance</string>
+        <string name="defaulters_report">Defaulters Report</string>
+    </resources>
