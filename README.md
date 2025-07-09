@@ -1,7 +1,7 @@
 
 # RISE Database (SQL & NoSQL) 
 
-** Student Id :- TS-RISE-DBSM-2628
+**Student Id:** TS-RISE-DBSM-2628
 
 **Offer Letter:**  
 [View Offer Letter](https://drive.google.com/file/d/1wMTbnMURJVXe2ywfG19PBcWZa1NrJppE/view?usp=drivesdk)
