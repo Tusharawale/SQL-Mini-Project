@@ -1,5 +1,5 @@
 
-# RISE Database (SQL & NoSQL) 
+# RISE Database (SQL / MongoDB)
 
 **Student Id:** TS-RISE-DBSM-2628
 
