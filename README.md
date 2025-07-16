@@ -6,6 +6,10 @@
 **Offer Letter:**  
 [View Offer Letter](https://drive.google.com/file/d/1wMTbnMURJVXe2ywfG19PBcWZa1NrJppE/view?usp=drivesdk)
 
+**Internship certificate:**  
+[View Certificate](https://drive.google.com/file/d/16jQGuzRtubRLvSwD3RUoJ7dXYTCp89QJ/view?usp=drivedk)
+
+
 ---
 
 A curated set of database-driven projects showcasing SQL, NoSQL, and backend development skills using MySQL, PostgreSQL, MongoDB, Flask, Django, Node.js, and more.
