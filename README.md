@@ -1,4 +1,6 @@
-
+<p align="center">
+  <img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=306,fit=crop,q=95/A1aB5K570OT1jwXk/img-20250125-wa0004-mjEqG9Z8PbTQ8BbV.jpg" alt="Company Logo" width="500"/>
+</p>
 # RISE Database (SQL / MongoDB)
 
 **Student Id:** TS-RISE-DBSM-2628
